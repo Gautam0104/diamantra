@@ -54,7 +54,7 @@ export default function RealPeopleSection() {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
+    <section className="py-16 md:py-24 relative overflow-hidden max-w-480 mx-auto">
       {/* Decorative diamond shapes – top right */}
       <div className="absolute top-4 right-4 md:top-8 md:right-12 pointer-events-none select-none">
 
@@ -77,7 +77,8 @@ export default function RealPeopleSection() {
           centeredSlides={true}
           breakpoints={{
             640: { spaceBetween: 40 },
-            1024: { spaceBetween: 80 },
+            1024: { spaceBetween: 60 },
+            1536: { spaceBetween: 70 },
           }}
           className="rp-swiper"
         >
@@ -122,6 +123,16 @@ export default function RealPeopleSection() {
           }
           .rp-swiper .swiper-slide {
             width: 200px !important;
+          }
+        }
+        @media (min-width: 1280px) {
+          .rp-swiper .swiper-slide {
+            width: 300px !important;
+          }
+        }
+        @media (min-width: 1536px) {
+          .rp-swiper .swiper-slide {
+            width: 320px !important;
           }
         }
       `}</style>
