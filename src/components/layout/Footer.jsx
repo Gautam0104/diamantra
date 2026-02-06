@@ -184,30 +184,30 @@ export default function Footer() {
         <div className="bg-maroon">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
             {/* Social icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-12">
               <a
                 href="#"
                 className="text-white hover:text-gold transition-colors"
               >
-                <Facebook size={16} />
+                <img src="/social-media-icon/fb.svg" alt="Facebook Icon" />
               </a>
               <a
                 href="#"
                 className="text-white hover:text-gold transition-colors"
               >
-                <Youtube size={16} />
+                <img src="/social-media-icon/yt.svg" alt="YouTube Icon" />
               </a>
               <a
                 href="#"
                 className="text-white hover:text-gold transition-colors"
               >
-                <XIcon size={16} />
+                <img src="/social-media-icon/x.svg" alt="X Icon" />
               </a>
               <a
                 href="#"
                 className="text-white hover:text-gold transition-colors"
               >
-                <Instagram size={16} />
+                <img src="/social-media-icon/insta.svg" alt="Instagram Icon" />
               </a>
             </div>
 
@@ -216,7 +216,7 @@ export default function Footer() {
 
             {/* Copyright */}
             <p className="text-xs text-white/80">
-              Copyright &copy; 2025 DIAMANTRA. All rights reserved.
+              Copyright &copy; {new Date().getFullYear()} DIAMANTRA. All rights reserved.
             </p>
           </div>
         </div>
