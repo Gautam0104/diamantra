@@ -5,7 +5,7 @@ export default function NewsletterCTA() {
   return (
     <>
       {/* Ready to Glow Up CTA */}
-      <section className="py-8 md:py-10 bg-black/40 ">
+      <section className="py-8 md:py-10 bg-gray-border ">
         <div className="max-w-2xl mx-auto px-4 flex flex-col items-center">
           <h2 className="text-3xl md:text-4xl font-heading text-white font-bold mb-3">
             Ready to Glow Up?

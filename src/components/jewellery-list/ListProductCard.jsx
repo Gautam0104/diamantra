@@ -24,6 +24,7 @@ export default function ListProductCard({ product }) {
 
           {/* Product image placeholder */}
           <div className="aspect-5/4 bg-white flex items-center justify-center">
+            {/* <img src="/jewellery-for-her-img.jpg" alt="Jewellary" /> */}
             {product.hasVideo && (
               <button className="w-12 h-12 rounded-full bg-black/60 flex items-center justify-center z-10">
                 <Play size={20} className="text-white ml-0.5" fill="white" />
@@ -36,7 +37,7 @@ export default function ListProductCard({ product }) {
         <div className="absolute top-3 -right-1.5 z-10 flex flex-col items-end">
           {/* Ribbon body */}
           <div
-            className="bg-linear-to-r from-amber-500 to-amber-600 text-white text-[12px] font-semibold py-2 pl-5 pr-2.5 tracking-wide"
+            className="bg-linear-to-r from-gold to-gold-light text-white text-[12px] font-semibold py-2 pl-5 pr-2.5 tracking-wide"
             style={{
               clipPath: "polygon(8% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%)",
             }}

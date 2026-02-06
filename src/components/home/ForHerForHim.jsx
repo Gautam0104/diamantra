@@ -19,8 +19,8 @@ function Sparkle({ className = "" }) {
 }
 
 const cards = [
-  { title: "For Her", subtitle: "Grace with Edge", button: "Shop Now" },
-  { title: "For Him", subtitle: "Grace with Edge", button: "Shop Now" },
+  { title: "For Her", subtitle: "Grace with Edge", button: "Shop Now", img: "/jewellery-for-her-img.jpg" },
+  { title: "For Him", subtitle: "Grace with Edge", button: "Shop Now", img: "/jewellery-for-him-img.jpg"  },
 ];
 
 export default function ForHerForHim() {
@@ -36,6 +36,7 @@ export default function ForHerForHim() {
             <div key={card.title} className="relative group cursor-pointer">
               {/* Card body */}
               <div className="relative h-64 sm:h-87.5 md:h-105 bg-[#6B6B6B] group-hover:bg-[#5a5a5a] transition-colors rounded-xl overflow-hidden">
+                {/* <img src={card.img} alt="Jewellery" className="w-full object-cover h-full" /> */}
                 <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10 z-10">
                   <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-1">
                     {card.title}

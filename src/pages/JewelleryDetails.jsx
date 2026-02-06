@@ -107,13 +107,24 @@ export default function JewelleryDetails() {
 
                         {/* Left - Image Gallery */}
                         <div className="">
+                            
                             {/* Main image */}
-                            <div className="aspect-5/4 bg-gray-border rounded-3xl overflow-hidden mb-3 relative">
-                                <div className="w-full bg-gray-border h-20">
-                                    <img src="/Vector.png" alt="Vector" className="ml-20" />
+                            <div className="aspect-5/4 rounded-3xl overflow-hidden mb-3 relative">
+                                {/* Background image - uncommet image and commet below div */}
+                                {/* <img
+                                    src="/jewellery-for-her-img.jpg"
+                                    alt="Jewellery"
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                /> */}
+                                <div className="absolute inset-0 w-full h-full object-cover bg-gray-border" />
+                                {/* Curve on top */}
+                                <div className="absolute top-0 left-20 right-0 flex z-10">
+                                    <img src="/Vector.png" alt="" />
                                 </div>
-                                <div className="absolute w-full  h-20 bottom-0 right-0 bg-gray-border flex flex-col items-end justify-end">
-                                    <img src="/Vector.png" alt="Vector" className="rotate-180 mr-20" />
+
+                                {/* Curve on bottom */}
+                                <div className="absolute bottom-0  right-20 flex z-10">
+                                    <img src="/Vector.png" alt="" className="rotate-180" />
                                 </div>
                             </div>
 
@@ -124,11 +135,14 @@ export default function JewelleryDetails() {
                                     className="flex gap-3 overflow-x-auto scrollbar-hide scroll-smooth"
                                 >
                                     {imagePlaceholders.map((_, i) => (
+                                        
                                         <div
                                             key={i}
                                             className="aspect-square bg-gray-border rounded-2xl overflow-hidden shrink-0"
                                             style={{ width: "calc((100% - 0.75rem * 3) / 4)" }}
-                                        />
+                                        >
+                                            {/* <img src="/jewellery-for-her-img.jpg" alt="Jewellary" /> */}
+                                        </div>
                                     ))}
                                 </div>
                                 <button
