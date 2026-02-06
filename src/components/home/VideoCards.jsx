@@ -10,7 +10,7 @@ export default function VideoCards() {
     <section className="py-16 bg-white mb-8 relative">
             {/* Background graphic behind content */}
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-75">
-        <img src="bg-graphic.png" alt="" className="" />
+        <img src="bg-graphic.png" alt="" className="h-[110%]" />
       </div>
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
