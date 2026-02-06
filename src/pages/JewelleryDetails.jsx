@@ -207,11 +207,7 @@ export default function JewelleryDetails() {
                                         { size: 7, mm: 45 }, { size: 8, mm: 46 }, { size: 9, mm: 47 },
                                         { size: 10, mm: 48 }, { size: 11, mm: 49 }, { size: 12, mm: 50 },
                                         { size: 13, mm: 51 }, { size: 14, mm: 52 }, { size: 15, mm: 53 },
-                                        { size: 16, mm: 54 }, { size: 17, mm: 55 }, { size: 18, mm: 56 },
-                                        { size: 19, mm: 57 }, { size: 20, mm: 58 }, { size: 21, mm: 59 },
-                                        { size: 22, mm: 60 }, { size: 23, mm: 61 }, { size: 24, mm: 62 },
-                                        { size: 25, mm: 63 }, { size: 26, mm: 64 }, { size: 27, mm: 65 },
-                                        { size: 28, mm: 66 }, { size: 29, mm: 67 }, { size: 30, mm: 68 },
+
                                     ];
                                     const match = product.sizeRange.match(/^(\d+)\s*\(.*?\)\s*-\s*(\d+)/);
                                     const minSize = match ? Number(match[1]) : 0;
@@ -219,7 +215,7 @@ export default function JewelleryDetails() {
                                     const availableSizes = ringSizes.filter(r => r.size >= minSize && r.size <= maxSize);
 
                                     return (
-                                        <div ref={sizeDropdownRef} className="relative flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                                        <div ref={sizeDropdownRef} className="relative flex items-center gap-2 cursor-pointer"
                                             onClick={() => setSizeDropdownOpen(prev => !prev)}
                                         >
                                             <div className="w-10 h-10 rounded-full flex items-center justify-center">
@@ -232,7 +228,7 @@ export default function JewelleryDetails() {
                                                 </p>
                                             </div>
                                             {sizeDropdownOpen && (
-                                                <ul className="absolute top-full left-0 mt-1 w-48 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1">
+                                                <ul className="absolute top-full left-0 mt-1 w-48 max-h-75 scrollbar-gold overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-999 py-1">
                                                     {availableSizes.map(r => (
                                                         <li
                                                             key={r.size}

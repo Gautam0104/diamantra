@@ -35,3 +35,18 @@ h1, h2, h3, h4, h5, h6 {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+.scrollbar-gold {
+  scrollbar-width: none;
+  scrollbar-color: var(--color-gold) transparent;
+}
+.scrollbar-gold::-webkit-scrollbar {
+  width: 2px;
+}
+.scrollbar-gold::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-gold::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 9999px;
+}
