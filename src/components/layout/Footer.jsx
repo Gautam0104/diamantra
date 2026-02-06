@@ -56,12 +56,10 @@ export default function Footer() {
 
         {/* Main footer content */}
         <div className="max-w-7xl mx-auto px-6 py-10 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-stretch gap-10 md:gap-20">
-            {/* Logo section with vertical line running full height */}
-            <div className="shrink-0 hidden md:flex items-center relative">
-              {/* Vertical line - absolute, spans full footer height */}
+          <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-20">
+            {/* Logo section with vertical line - desktop only */}
+            <div className="shrink-0 hidden lg:flex items-center relative">
               <div className="absolute left-1/2 -translate-x-1/2 -top-10 -bottom-10 w-0.5 bg-white"></div>
-              {/* Logo circle on top of line */}
               <div className="w-40 h-40 bg-white rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,255,255,0.1)] relative z-10">
                 <img
                   src="/logo.png"
@@ -70,9 +68,9 @@ export default function Footer() {
                 />
               </div>
             </div>
-            {/* Logo for mobile (no lines) */}
-            <div className="shrink-0 self-center md:hidden">
-              <div className="w-40 h-40 bg-white rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+            {/* Logo for tablet & mobile (no lines) */}
+            <div className="shrink-0 self-center lg:hidden">
+              <div className="w-28 h-28 md:w-36 md:h-36 bg-white rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
                 <img
                   src="/logo.png"
                   alt="DiaMantra"
@@ -81,12 +79,13 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Quick Links - two columns */}
-            <div className="min-w-0 md:ml-20">
-              <h4 className="text-sm font-semibold mb-4 tracking-wide">
-                Quick Links
-              </h4>
-              <div className="flex gap-10">
+            {/* Link sections wrapper: 2-col grid on mobile, 4-col on tablet, flex row on desktop */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:flex lg:gap-20 lg:flex-1 lg:ml-20">
+              {/* Quick Links col 1 */}
+              <div>
+                <h4 className="text-sm font-semibold mb-4 tracking-wide">
+                  Quick Links
+                </h4>
                 <ul className="space-y-1.5">
                   {footerLinks.quickLinksCol1.map((link) => (
                     <li key={link.name}>
@@ -99,6 +98,13 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* Quick Links col 2 */}
+              <div>
+                <h4 className="text-sm font-semibold mb-4 tracking-wide lg:invisible">
+                  &nbsp;
+                </h4>
                 <ul className="space-y-1.5">
                   {footerLinks.quickLinksCol2.map((link) => (
                     <li key={link.name}>
@@ -112,64 +118,64 @@ export default function Footer() {
                   ))}
                 </ul>
               </div>
-            </div>
 
-            {/* About Us + Here to Assist */}
-            <div className="min-w-0 md:ml-20">
-              <h4 className="text-sm font-semibold mb-4 tracking-wide">
-                About Us
-              </h4>
-              <ul className="space-y-1.5">
-                {footerLinks.aboutUs.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-[13px] text-white/50 hover:text-gold transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              {/* About Us + Here to Assist */}
+              <div>
+                <h4 className="text-sm font-semibold mb-4 tracking-wide">
+                  About Us
+                </h4>
+                <ul className="space-y-1.5">
+                  {footerLinks.aboutUs.map((link) => (
+                    <li key={link.name}>
+                      <a
+                        href={link.href}
+                        className="text-[13px] text-white/50 hover:text-gold transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
 
-              <h4 className="text-sm font-semibold mt-6 mb-3 tracking-wide">
-                Here to Assist
-              </h4>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                <a
-                  href="tel:+919876543210"
-                  className="flex items-center gap-1.5 text-[13px] text-white/50 hover:text-gold transition-colors"
-                >
-                  <Phone size={13} />
-                  +91 98765 43210
-                </a>
-                <a
-                  href="mailto:contact@diamantra.com"
-                  className="flex items-center gap-1.5 text-[13px] text-white/50 hover:text-gold transition-colors"
-                >
-                  <Mail size={13} />
-                  contact@diamantra.com
-                </a>
+                <h4 className="text-sm font-semibold mt-6 mb-3 tracking-wide">
+                  Here to Assist
+                </h4>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="tel:+919876543210"
+                    className="flex items-center gap-1.5 text-[13px] text-white/50 hover:text-gold transition-colors"
+                  >
+                    <Phone size={13} className="shrink-0" />
+                    +91 98765 43210
+                  </a>
+                  <a
+                    href="mailto:contact@diamantra.com"
+                    className="flex items-center gap-1.5 text-[13px] text-white/50 hover:text-gold transition-colors"
+                  >
+                    <Mail size={13} className="shrink-0" />
+                    contact@diamantra.com
+                  </a>
+                </div>
               </div>
-            </div>
 
-            {/* Resources */}
-            <div className="shrink-0 md:ml-10">
-              <h4 className="text-sm font-semibold mb-4 tracking-wide">
-                Resources
-              </h4>
-              <ul className="space-y-1.5">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-[13px] text-white/50 hover:text-gold transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              {/* Resources */}
+              <div>
+                <h4 className="text-sm font-semibold mb-4 tracking-wide">
+                  Resources
+                </h4>
+                <ul className="space-y-1.5">
+                  {footerLinks.resources.map((link) => (
+                    <li key={link.name}>
+                      <a
+                        href={link.href}
+                        className="text-[13px] text-white/50 hover:text-gold transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

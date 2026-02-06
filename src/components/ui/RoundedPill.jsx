@@ -9,7 +9,7 @@ const RoundedPill = ({
   return (
     <button 
       onClick={onClick}
-      className="group relative flex items-center justify-center px-2 py-1 md:px-4  transition-transform active:scale-95"
+      className="group relative flex items-center justify-center px-4 py-2 md:px-4  transition-transform active:scale-95"
     >
       {/* Main Button Body */}
       <div 
@@ -36,7 +36,7 @@ const RoundedPill = ({
       </div>
 
       {/* Button Text */}
-      <span className="relative z-10 text-sm md:text-lg  font-semibold text-white tracking-tight">
+      <span className="relative z-10 text-xs md:text-lg  font-semibold text-white tracking-tight">
         {text}
       </span>
     </button>

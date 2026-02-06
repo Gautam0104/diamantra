@@ -20,22 +20,22 @@ export default function NewsletterCTA() {
 
       {/* Newsletter */}
       <section className="py-8 md:py-10 bg-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
-        <h2 className="text-base sm:text-lg md:text-xl font-bold text-charcoal">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+        <h2 className="text-base sm:text-lg md:text-xl font-bold text-charcoal text-center md:text-left">
           Join Our Newsletter to keep up to date with US!
         </h2>
 
         <div className="w-full md:w-auto">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 rounded-full border border-gray-300 px-1">
+          <div className="flex flex-row items-center gap-3 rounded-full border border-gray-300 px-1 py-1">
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full sm:w-64 px-5 py-2.5  text-sm text-charcoal placeholder-gray-400 focus:outline-none focus:border-gold transition-colors"
+              className="flex-1 min-w-0 sm:w-64 px-5 py-2.5 text-sm text-charcoal placeholder-gray-400 focus:outline-none focus:border-gold transition-colors bg-transparent"
             />
             <RoundedPill text="Subscribe" />
           </div>
-          <label className="flex items-center gap-2 mt-3 text-xs text-gray-500 cursor-pointer">
-            <input type="checkbox" className="accent-gold" />
+          <label className="flex items-start gap-2 mt-3 text-xs text-gray-500 cursor-pointer">
+            <input type="checkbox" className="accent-gold mt-0.5 shrink-0" />
             <span>
               By proceeding you agree to our{" "}
               <a href="#" className="underline text-gray-600 hover:text-charcoal">
