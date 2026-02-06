@@ -1,6 +1,6 @@
-import { useState, useRef, Fragment } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Minus, Plus, Star, ArrowLeft, ArrowRight, ChevronDown, Heart, X } from "lucide-react";
+import { Minus, Plus, Star, ArrowLeft, ArrowRight, ChevronDown, Heart } from "lucide-react";
 import NewsletterCTA from "../components/common/newsletter/NewsletterCTA";
 import HeroBanner from "../components/jewellery-details/HeroBanner";
 import ListProductCard from "../components/jewellery-list/ListProductCard";
@@ -44,9 +44,21 @@ export default function JewelleryDetails() {
     const [pincode, setPincode] = useState("");
     const [knowOpen, setKnowOpen] = useState(true);
     const [careOpen, setCareOpen] = useState(false);
-    const [sizeChartOpen, setSizeChartOpen] = useState(false);
+
     const [selectedSize, setSelectedSize] = useState(null);
+    const [sizeDropdownOpen, setSizeDropdownOpen] = useState(false);
+    const sizeDropdownRef = useRef(null);
     const thumbRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (sizeDropdownRef.current && !sizeDropdownRef.current.contains(e.target)) {
+                setSizeDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const product = ringProducts.find((p) => p.id === Number(id)) || featuredProducts.find((p) => p.id === Number(id));
 
@@ -188,22 +200,61 @@ export default function JewelleryDetails() {
                                 <p className="text-maroon font-bold text-[28px]">
                                     &#8377;{product.price.toLocaleString("en-IN")}
                                 </p>
-                                {product.sizeRange && (
-                                    <button
-                                        onClick={() => setSizeChartOpen(true)}
-                                        className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-                                    >
-                                        <div className="w-10 h-10 rounded-full flex items-center justify-center ">
-                                            <img src="/size-chart.svg" alt="Size Chart" className="w-full h-full" />
+                                {product.sizeRange && (() => {
+                                    const ringSizes = [
+                                        { size: 1, mm: 39 }, { size: 2, mm: 40 }, { size: 3, mm: 41 },
+                                        { size: 4, mm: 42 }, { size: 5, mm: 43 }, { size: 6, mm: 44 },
+                                        { size: 7, mm: 45 }, { size: 8, mm: 46 }, { size: 9, mm: 47 },
+                                        { size: 10, mm: 48 }, { size: 11, mm: 49 }, { size: 12, mm: 50 },
+                                        { size: 13, mm: 51 }, { size: 14, mm: 52 }, { size: 15, mm: 53 },
+                                        { size: 16, mm: 54 }, { size: 17, mm: 55 }, { size: 18, mm: 56 },
+                                        { size: 19, mm: 57 }, { size: 20, mm: 58 }, { size: 21, mm: 59 },
+                                        { size: 22, mm: 60 }, { size: 23, mm: 61 }, { size: 24, mm: 62 },
+                                        { size: 25, mm: 63 }, { size: 26, mm: 64 }, { size: 27, mm: 65 },
+                                        { size: 28, mm: 66 }, { size: 29, mm: 67 }, { size: 30, mm: 68 },
+                                    ];
+                                    const match = product.sizeRange.match(/^(\d+)\s*\(.*?\)\s*-\s*(\d+)/);
+                                    const minSize = match ? Number(match[1]) : 0;
+                                    const maxSize = match ? Number(match[2]) : 0;
+                                    const availableSizes = ringSizes.filter(r => r.size >= minSize && r.size <= maxSize);
+
+                                    return (
+                                        <div ref={sizeDropdownRef} className="relative flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                                            onClick={() => setSizeDropdownOpen(prev => !prev)}
+                                        >
+                                            <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                                                <img src="/size-chart.svg" alt="Size Chart" className="w-full h-full" />
+                                            </div>
+                                            <div className="text-left">
+                                                <p className="text-[10px] font-bold text-charcoal uppercase tracking-wide">Size Chart</p>
+                                                <p className="text-md font-semibold text-charcoal">
+                                                    {selectedSize ? `${selectedSize.size} (${selectedSize.mm}mm)` : product.sizeRange}
+                                                </p>
+                                            </div>
+                                            {sizeDropdownOpen && (
+                                                <ul className="absolute top-full left-0 mt-1 w-48 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1">
+                                                    {availableSizes.map(r => (
+                                                        <li
+                                                            key={r.size}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setSelectedSize({ size: r.size, mm: r.mm });
+                                                                setSizeDropdownOpen(false);
+                                                            }}
+                                                            className={`px-4 py-2 text-sm cursor-pointer transition-colors ${
+                                                                selectedSize?.size === r.size
+                                                                    ? "bg-gold text-white font-semibold"
+                                                                    : "text-charcoal hover:bg-gold/20"
+                                                            }`}
+                                                        >
+                                                            Size {r.size} ({r.mm}mm)
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
                                         </div>
-                                        <div className="text-left">
-                                            <p className="text-[10px] font-bold text-charcoal uppercase tracking-wide">Size Chart</p>
-                                            <p className="text-md font-semibold text-charcoal">
-                                                {selectedSize ? `${selectedSize.size} (${selectedSize.mm}mm)` : product.sizeRange}
-                                            </p>
-                                        </div>
-                                    </button>
-                                )}
+                                    );
+                                })()}
                             </div>
 
                             {/* Quality badges */}
@@ -430,102 +481,6 @@ export default function JewelleryDetails() {
 
             <NewsletterCTA />
 
-            {/* Size Chart Modal */}
-            {sizeChartOpen && product.sizeRange && (() => {
-                const ringSizes = [
-                    { size: 1, mm: 39 }, { size: 2, mm: 40 }, { size: 3, mm: 41 },
-                    { size: 4, mm: 42 }, { size: 5, mm: 43 }, { size: 6, mm: 44 },
-                    { size: 7, mm: 45 }, { size: 8, mm: 46 }, { size: 9, mm: 47 },
-                    { size: 10, mm: 48 }, { size: 11, mm: 49 }, { size: 12, mm: 50 },
-                    { size: 13, mm: 51 }, { size: 14, mm: 52 }, { size: 15, mm: 53 },
-                    { size: 16, mm: 54 }, { size: 17, mm: 55 }, { size: 18, mm: 56 },
-                    { size: 19, mm: 57 }, { size: 20, mm: 58 }, { size: 21, mm: 59 },
-                    { size: 22, mm: 60 }, { size: 23, mm: 61 }, { size: 24, mm: 62 },
-                    { size: 25, mm: 63 }, { size: 26, mm: 64 }, { size: 27, mm: 65 },
-                    { size: 28, mm: 66 }, { size: 29, mm: 67 }, { size: 30, mm: 68 },
-                ];
-                const match = product.sizeRange.match(/^(\d+)\s*\(.*?\)\s*-\s*(\d+)/);
-                const minSize = match ? Number(match[1]) : 0;
-                const maxSize = match ? Number(match[2]) : 0;
-
-                return (
-                    <div
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-                        onClick={() => setSizeChartOpen(false)}
-                    >
-                        <div
-                            className="bg-white rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-xl"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Header */}
-                            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-                                <div className="flex items-center gap-2">
-                                    <img src="/size-chart.svg" alt="" className="w-7 h-7" />
-                                    <h3 className="font-heading text-xl text-charcoal italic">Ring Size Chart</h3>
-                                </div>
-                                <button
-                                    onClick={() => setSizeChartOpen(false)}
-                                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50"
-                                >
-                                    <X size={16} className="text-gray-500" />
-                                </button>
-                            </div>
-
-                            {/* Available range badge */}
-                            <div className="px-6 pt-4 pb-2">
-                                <p className="text-xs text-gray-text">
-                                    Available for this product: <span className="font-bold text-maroon">{product.sizeRange}</span>
-                                </p>
-                            </div>
-
-                            {/* Table */}
-                            <div className="overflow-y-auto px-6 pb-6">
-                                <table className="w-full text-sm">
-                                    <thead>
-                                        <tr className="border-b-2 border-gray-200">
-                                            <th className="py-2.5 text-left text-xs font-bold text-charcoal uppercase tracking-wide">Size</th>
-                                            <th className="py-2.5 text-left text-xs font-bold text-charcoal uppercase tracking-wide">Inner Circumference</th>
-                                            <th className="py-2.5 text-left text-xs font-bold text-charcoal uppercase tracking-wide">Inner Diameter</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {ringSizes.map((r) => {
-                                            const inRange = r.size >= minSize && r.size <= maxSize;
-                                            const isSelected = selectedSize?.size === r.size;
-                                            return (
-                                                <tr
-                                                    key={r.size}
-                                                    onClick={() => {
-                                                        if (inRange) {
-                                                            setSelectedSize({ size: r.size, mm: r.mm });
-                                                            setSizeChartOpen(false);
-                                                        }
-                                                    }}
-                                                    className={`border-b border-gray-100 ${
-                                                        isSelected ? "bg-maroon/10 ring-1 ring-maroon" :
-                                                        inRange ? "bg-gold/10 hover:bg-gold/20 cursor-pointer" :
-                                                        "opacity-40"
-                                                    }`}
-                                                >
-                                                    <td className={`py-2 font-semibold ${isSelected || inRange ? "text-maroon" : "text-charcoal"}`}>
-                                                        {r.size}
-                                                    </td>
-                                                    <td className={`py-2 ${isSelected || inRange ? "text-maroon" : "text-gray-text"}`}>
-                                                        {(r.mm * Math.PI).toFixed(1)} mm
-                                                    </td>
-                                                    <td className={`py-2 ${isSelected || inRange ? "text-maroon" : "text-gray-text"}`}>
-                                                        {r.mm} mm
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })()}
         </main>
     );
 }
